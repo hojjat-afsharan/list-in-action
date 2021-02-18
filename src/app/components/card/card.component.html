@@ -1,0 +1,27 @@
+<h1 [class.test]="isActive">{{ "card" | uppercase }}</h1>
+<h2 [style.backgroundColor]="isActive ? 'blue' : 'green'">
+  {{ Mode | currency: "EUR":"code" }}
+</h2>
+
+<button (click)="onSave($event); changeMode.emit(outputObj)" value="10">
+  save
+</button>
+<input
+  #input
+  (keyup.enter)="keyUp(input.value); changeMode.emit(outputObj)"
+  [(ngModel)]="someNumber"
+/>
+
+<p app-highlight>{{ text | summary }}</p>
+
+<ng-content select=".help"></ng-content>
+
+<p
+  *ngIf="lessThanZeroFun(someNumber); then lessThanZero; else greaterThanZero"
+></p>
+<ng-template #lessThanZero>
+  <p [class.zero]="lessThanZeroFun(someNumber)">{{ someNumber }} is less than 0</p>
+</ng-template>
+<ng-template #greaterThanZero>
+  <p>{{ someNumber }} is greater than zero</p>
+</ng-template>
